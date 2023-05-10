@@ -1,21 +1,24 @@
 package com.study.api.rest.demo.services;
 
-import com.study.api.rest.demo.Factory;
 import com.study.api.rest.demo.dtos.PostDto;
 import com.study.api.rest.demo.exceptions.PostNotFound;
 import com.study.api.rest.demo.models.Post;
 import com.study.api.rest.demo.repositories.PostRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+//@Component
+@Service
 public class GetPostDtoListService {
     //    private final PostDAO postDAO;
     private final PostRepository postRepository;
 
-    public GetPostDtoListService() {
+    public GetPostDtoListService(PostRepository postRepository) {
         // PostDAO 인터페이스만 알면 좋은데 다른것도 여기서 알게 됨.
 //        this.postDAO = new PostListDAO();
-        postRepository = Factory.postRepository();
+//        postRepository = Factory.postRepository();
+        this.postRepository = postRepository;
     }
 
     public List<PostDto> getPostDtos() {

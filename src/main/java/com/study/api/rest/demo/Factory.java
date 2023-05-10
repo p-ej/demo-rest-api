@@ -9,6 +9,6 @@ public class Factory {
         if (postRepository == null) {
             postRepository = new PostRepository();
         }
-        return postRepository();
+        return postRepository;
     }
 }

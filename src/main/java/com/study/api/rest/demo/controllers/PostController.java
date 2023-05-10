@@ -2,10 +2,11 @@ package com.study.api.rest.demo.controllers;
 
 import com.study.api.rest.demo.dtos.PostDto;
 import com.study.api.rest.demo.exceptions.PostNotFound;
+import com.study.api.rest.demo.services.CreatePostService;
+import com.study.api.rest.demo.services.DeletePostService;
 import com.study.api.rest.demo.services.GetPostDtoListService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,10 +25,15 @@ import java.util.List;
 public class PostController {
     //    private final ObjectMapper objectMapper;
     private final GetPostDtoListService getPostDtoListService;
+    private final CreatePostService createPostService;
+    private final DeletePostService deletePostService;
 
-    public PostController() {
+
+    public PostController(GetPostDtoListService getPostDtoListService, CreatePostService createPostService, DeletePostService deletePostService) {
 //        this.objectMapper = new objectMapper;
-        getPostDtoListService = new GetPostDtoListService();
+        this.getPostDtoListService = getPostDtoListService;
+        this.createPostService = createPostService;
+        this.deletePostService = deletePostService;
     }
 
     @GetMapping
@@ -63,12 +69,10 @@ public class PostController {
 //
 //        return postDto;
 //    }
-    @CrossOrigin("*")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PostDto create(@RequestBody PostDto postDto) {
-
-        return postDto;
+        return createPostService.createPost(postDto);
     }
 
     @PatchMapping("/{id}")
@@ -79,8 +83,9 @@ public class PostController {
 
     @DeleteMapping("/{id}")
     public PostDto delete(@PathVariable("id") String id) {
-        PostDto postDto = new PostDto(id, "aa", "ddd");
-        return postDto;
+//        PostDto postDto = new PostDto(id, "aa", "ddd");
+
+        return deletePostService.deletePost(id);
     }
 
     @ExceptionHandler(PostNotFound.class)

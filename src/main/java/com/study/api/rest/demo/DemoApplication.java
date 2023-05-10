@@ -10,8 +10,29 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class DemoApplication {
 
     public static void main(String[] args) {
+//        ApplicationContext context =
+//                new AnnotationConfigApplicationContext(DemoApplication.class);
+//
+//        GetPostDtoListService getPostDtoListService = context.getBean("getPostDtoListService", GetPostDtoListService.class);
+//        PostController postController = context.getBean("postController", PostController.class);
+//
+//        System.out.println("-".repeat(80));
+//        System.out.println(postController);
+//        System.out.println("-".repeat(80));
+//        System.out.println(getPostDtoListService);
         SpringApplication.run(DemoApplication.class, args);
     }
+
+//    @Bean
+//    public PostRepository postRepository() {
+//        return new PostRepository();
+//    }
+//
+//
+//    @Bean
+//    public GetPostDtoListService getPostDtoListService() {
+//        return new GetPostDtoListService(postRepository());
+//    }
 
     @Bean
     public WebMvcConfigurer webMvcConfigurer() {
