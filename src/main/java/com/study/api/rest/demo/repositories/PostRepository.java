@@ -5,6 +5,7 @@ import com.study.api.rest.demo.models.Post;
 import com.study.api.rest.demo.models.PostId;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class PostRepository {
     }
 
     public List<Post> findAll() {
-        return posts.values().stream().sorted((a, b) -> a.id() < b.id());
+        return new ArrayList<>(posts.values());
     }
 
     public Post find(String id) {
